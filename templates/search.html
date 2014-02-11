@@ -1,0 +1,43 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Whoosh Searcher | Stay in the know!</title>
+        <link rel="stylesheet" href="site_media/style.css" type="text/css" />
+    </head>
+    <body>
+        <img src="site_media/whoosh_logo.png">
+        <form action="" method="get" class="searchform">
+        </br>
+        <input type="text" class="searchfield" id="id_q" name="q" value="{{ query|default_if_none:"Search..." }}"  onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value=='') {this.value = 'Search...';}"/>
+        <input type="submit" class="searchbutton" value="Go"/>
+        <div class="center">
+        <input type="radio" name="newspaper" value="Guardian" checked="checked">Guardian
+        <input type="radio" name="newspaper" value="Huffington">Huffington
+        <input type="radio" name="newspaper" value="Reuters">Reuters
+        </div>
+    </br>
+
+        </form>
+    </br>
+
+
+        
+            {% for hit in hits %}
+            <div class = "results">
+                <a href="{{ hit.url }}">{{ hit.title }}</a></br>
+                <span>Keywords:<i>
+                    {{ hit.keywords |safe}}
+                </i>
+                </span>
+                </br>
+                <span>
+                    {{ hit.highlights |safe}}
+                </span>
+             </div>
+            </br>
+            {% endfor %}
+        
+    </body>
+</html>
